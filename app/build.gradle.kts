@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose) // dependency viewmodel compose
     implementation(libs.androidx.navigation.compose) // dependency navigation
     implementation(libs.kotlinx.serialization.json) // dependency untuk support navigation
+    implementation(libs.androidx.material.icons.extended) // dependency icon
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
