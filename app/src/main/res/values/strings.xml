@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Mini Project Todo List</string>
+    <!--  String untuk component  -->
+    <string name="visibility_on">Visibility On</string>
+    <string name="visibility_off">Visibility Off</string>
 </resources>
