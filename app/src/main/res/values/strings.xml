@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Mini Project Todo List</string>
     <!--  String untuk component  -->
+    <string name="name_label">Name</string>
+    <string name="name_hint">Masukkan nama anda</string>
     <string name="email_label">Email</string>
     <string name="email_hint">Gunakan email anda</string>
     <string name="password_label">Password</string>
@@ -10,4 +12,7 @@
     <!--  String untuk LoginScreen  -->
     <string name="login_headline">Login</string>
     <string name="login_hint">Selamat datang! Yuk login pake email dan password kamu</string>
+    <!--  String untuk RegisterScreen  -->
+    <string name="register_headline">Register</string>
+    <string name="register_hint">Yuk register pake email dan password kamu</string>
 </resources>
