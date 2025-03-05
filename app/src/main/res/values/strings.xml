@@ -12,7 +12,9 @@
     <!--  String untuk LoginScreen  -->
     <string name="login_headline">Login</string>
     <string name="login_hint">Selamat datang! Yuk login pake email dan password kamu</string>
+    <string name="to_register">Belum punya akun? Daftar disini</string>
     <!--  String untuk RegisterScreen  -->
     <string name="register_headline">Register</string>
     <string name="register_hint">Yuk register pake email dan password kamu</string>
+    <string name="to_login">Sudah punya akun? Login disini</string>
 </resources>
