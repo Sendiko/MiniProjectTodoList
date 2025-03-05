@@ -50,23 +50,26 @@ class RegisterViewModel: ViewModel() {
     }
 
     private fun register() {
-        if (state.value.name.isEmpty())
+        if (state.value.name.isEmpty()){
             _state.update {
                 it.copy(message = "Name is required")
             }
-        return
+            return
+        }
 
-        if (state.value.email.isEmpty())
+        if (state.value.email.isEmpty()){
             _state.update {
                 it.copy(message = "Email is required")
             }
-        return
+            return
+        }
 
-        if (state.value.password.isEmpty())
+        if (state.value.password.isEmpty()){
             _state.update {
                 it.copy(message = "Password is required")
             }
-        return
+            return
+        }
 
         _state.update {
             it.copy(message = "Register Successful", successRegister = true)

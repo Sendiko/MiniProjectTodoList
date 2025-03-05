@@ -23,6 +23,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.cheva.miniprojecttodolist.R
+import org.cheva.miniprojecttodolist.navigation.DashboardScreen
 import org.cheva.miniprojecttodolist.navigation.RegisterScreen
 import org.cheva.miniprojecttodolist.ui.components.OutlinedTextField
 import org.cheva.miniprojecttodolist.ui.components.ResultDialog
@@ -39,7 +40,7 @@ fun LoginScreen(
 
     LaunchedEffect(state.successLogin) {
         if (state.successLogin)
-            onNavigate("")
+            onNavigate(DashboardScreen)
     }
     Scaffold {
         if (state.message.isNotBlank()) {
