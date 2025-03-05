@@ -4,13 +4,18 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import org.cheva.miniprojecttodolist.login.LoginScreen
+import org.cheva.miniprojecttodolist.login.LoginViewModel
+import org.cheva.miniprojecttodolist.navigation.LoginScreen
+import org.cheva.miniprojecttodolist.navigation.RegisterScreen
+import org.cheva.miniprojecttodolist.register.RegisterScreen
+import org.cheva.miniprojecttodolist.register.RegisterViewModel
 import org.cheva.miniprojecttodolist.ui.theme.MiniProjectTodoListTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +24,32 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MiniProjectTodoListTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = LoginScreen,
+                    builder = {
+                        composable<LoginScreen> {
+                            val viewModel = viewModel<LoginViewModel>()
+                            val state by viewModel.state.collectAsStateWithLifecycle()
+                            LoginScreen(
+                                state = state,
+                                onEvent = viewModel::onEvent,
+                                onNavigate = { navController.navigate(it) }
+                            )
+                        }
+                        composable<RegisterScreen> {
+                            val viewModel = viewModel<RegisterViewModel>()
+                            val state by viewModel.state.collectAsStateWithLifecycle()
+                            RegisterScreen(
+                                state = state,
+                                onEvent = viewModel::onEvent,
+                                onNavigate = { navController.navigate(it) }
+                            )
+                        }
+                    }
+                )
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MiniProjectTodoListTheme {
-        Greeting("Android")
     }
 }
