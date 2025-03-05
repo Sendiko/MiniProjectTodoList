@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -22,6 +23,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.cheva.miniprojecttodolist.R
+import org.cheva.miniprojecttodolist.navigation.RegisterScreen
 import org.cheva.miniprojecttodolist.ui.components.OutlinedTextField
 import org.cheva.miniprojecttodolist.ui.components.ResultDialog
 import org.cheva.miniprojecttodolist.ui.components.SecureTextField
@@ -86,6 +88,12 @@ fun LoginScreen(
                 onClick = { onEvent(LoginEvent.OnLoginClicked) }
             ) {
                 Text(stringResource(R.string.login_headline))
+            }
+            TextButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = { onNavigate(RegisterScreen) }
+            ) {
+                Text(stringResource(R.string.to_register))
             }
         }
     }
