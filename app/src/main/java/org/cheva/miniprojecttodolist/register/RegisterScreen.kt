@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import org.cheva.miniprojecttodolist.R
 import org.cheva.miniprojecttodolist.navigation.DashboardScreen
-import org.cheva.miniprojecttodolist.navigation.LoginScreen
 import org.cheva.miniprojecttodolist.ui.components.OutlinedTextField
 import org.cheva.miniprojecttodolist.ui.components.ResultDialog
 import org.cheva.miniprojecttodolist.ui.components.SecureTextField
@@ -101,7 +100,7 @@ fun RegisterScreen(
             }
             TextButton(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { onNavigate(LoginScreen) }
+                onClick = { onNavigate(TODO("Navigasi ke LoginScreen")) }
             ) {
                 Text(stringResource(R.string.to_register))
             }

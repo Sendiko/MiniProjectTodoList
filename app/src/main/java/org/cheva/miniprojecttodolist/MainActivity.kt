@@ -11,10 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.cheva.miniprojecttodolist.dashboard.DashboardScreen
-import org.cheva.miniprojecttodolist.login.LoginScreen
-import org.cheva.miniprojecttodolist.login.LoginViewModel
 import org.cheva.miniprojecttodolist.navigation.DashboardScreen
-import org.cheva.miniprojecttodolist.navigation.LoginScreen
 import org.cheva.miniprojecttodolist.navigation.RegisterScreen
 import org.cheva.miniprojecttodolist.register.RegisterScreen
 import org.cheva.miniprojecttodolist.register.RegisterViewModel
@@ -29,17 +26,8 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = LoginScreen,
+                    startDestination = RegisterScreen,
                     builder = {
-                        composable<LoginScreen> {
-                            val viewModel = viewModel<LoginViewModel>()
-                            val state by viewModel.state.collectAsStateWithLifecycle()
-                            LoginScreen(
-                                state = state,
-                                onEvent = viewModel::onEvent,
-                                onNavigate = { navController.navigate(it) }
-                            )
-                        }
                         composable<RegisterScreen> {
                             val viewModel = viewModel<RegisterViewModel>()
                             val state by viewModel.state.collectAsStateWithLifecycle()
@@ -52,6 +40,7 @@ class MainActivity : ComponentActivity() {
                         composable<DashboardScreen> {
                             DashboardScreen()
                         }
+                        TODO("Definisikan LoginScreen")
                     }
                 )
             }
