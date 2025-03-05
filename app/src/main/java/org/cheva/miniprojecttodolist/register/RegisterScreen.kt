@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import org.cheva.miniprojecttodolist.R
 import org.cheva.miniprojecttodolist.ui.components.OutlinedTextField
+import org.cheva.miniprojecttodolist.ui.components.ResultDialog
 import org.cheva.miniprojecttodolist.ui.components.SecureTextField
 import org.cheva.miniprojecttodolist.ui.theme.MiniProjectTodoListTheme
 
@@ -40,6 +41,13 @@ fun RegisterScreen(
         }
     }
     Scaffold {
+        if (state.message.isNotBlank()) {
+            ResultDialog(
+                isSuccess = state.successRegister,
+                message = state.message,
+                onDismiss = { onEvent(RegisterEvent.OnDismissDialog) }
+            )
+        }
         Column(
             modifier = Modifier
                 .fillMaxSize()

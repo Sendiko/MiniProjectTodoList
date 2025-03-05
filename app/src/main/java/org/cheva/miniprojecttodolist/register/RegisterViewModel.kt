@@ -17,7 +17,12 @@ class RegisterViewModel: ViewModel() {
             is RegisterEvent.OnPasswordChanged -> changePassword(event.password)
             is RegisterEvent.OnPasswordVisibilityChanged -> changePasswordVisibility(event.isVisible)
             RegisterEvent.OnRegisterClicked -> register()
+            RegisterEvent.OnDismissDialog -> dismissDialog()
         }
+    }
+
+    private fun dismissDialog() {
+        _state.update { it.copy(message = "", successRegister = false) }
     }
 
     private fun changeName(name: String) {
