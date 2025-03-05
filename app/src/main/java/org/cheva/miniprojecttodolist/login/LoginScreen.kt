@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.cheva.miniprojecttodolist.R
 import org.cheva.miniprojecttodolist.ui.components.OutlinedTextField
+import org.cheva.miniprojecttodolist.ui.components.ResultDialog
 import org.cheva.miniprojecttodolist.ui.components.SecureTextField
 import org.cheva.miniprojecttodolist.ui.theme.MiniProjectTodoListTheme
 
@@ -39,8 +40,16 @@ fun LoginScreen(
             onNavigate("")
     }
     Scaffold {
+        if (state.message.isNotBlank()) {
+            ResultDialog(
+                isSuccess = state.successLogin,
+                message = state.message,
+                onDismiss = { onEvent(LoginEvent.OnDismissDialog) }
+            )
+        }
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .padding(16.dp),
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center

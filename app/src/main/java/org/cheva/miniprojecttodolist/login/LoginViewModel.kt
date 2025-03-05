@@ -16,7 +16,12 @@ class LoginViewModel: ViewModel() {
             is LoginEvent.OnPasswordChanged -> changePassword(event.password)
             is LoginEvent.OnPasswordVisibilityChanged -> changePasswordVisibility(event.isVisible)
             LoginEvent.OnLoginClicked -> login()
+            LoginEvent.OnDismissDialog -> dismissDialog()
         }
+    }
+
+    private fun dismissDialog() {
+        _state.update { it.copy(message = "", successLogin = false) }
     }
 
     private fun changeEmail(email: String) {
