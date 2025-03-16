@@ -1,6 +1,7 @@
 package org.cheva.miniprojecttodolist.register
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -17,13 +19,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import org.cheva.miniprojecttodolist.R
 import org.cheva.miniprojecttodolist.navigation.DashboardScreen
+import org.cheva.miniprojecttodolist.navigation.LoginScreen
 import org.cheva.miniprojecttodolist.ui.components.OutlinedTextField
 import org.cheva.miniprojecttodolist.ui.components.ResultDialog
 import org.cheva.miniprojecttodolist.ui.components.SecureTextField
@@ -36,6 +43,8 @@ fun RegisterScreen(
     onEvent: (RegisterEvent) -> Unit,
     onNavigate: (Any) -> Unit
 ) {
+    val emailFocusRequester = FocusRequester()
+    val passwordFocusRequester = FocusRequester()
     LaunchedEffect(state.successRegister) {
         if (state.successRegister){
             delay(1000)
@@ -57,6 +66,12 @@ fun RegisterScreen(
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center
         ) {
+            Image(
+                painter = painterResource(R.drawable.register_image),
+                contentDescription = stringResource(R.string.app_name),
+                modifier = Modifier.weight(1f)
+                    .fillMaxWidth()
+            )
             Text(
                 text = stringResource(R.string.register_headline),
                 style = MaterialTheme.typography.headlineMedium
@@ -72,18 +87,28 @@ fun RegisterScreen(
                 value = state.name,
                 onValueChange = { onEvent(RegisterEvent.OnNameChanged(it)) },
                 keyboardType = KeyboardType.Text,
-                hint = stringResource(R.string.name_hint)
+                hint = stringResource(R.string.name_hint),
+                imeAction = ImeAction.Next,
+                action = KeyboardActions(
+                    onNext = { emailFocusRequester.requestFocus() }
+                )
             )
             Spacer(modifier = Modifier.height(8.dp))
             OutlinedTextField(
+                modifier = Modifier.focusRequester(emailFocusRequester),
                 label = stringResource(R.string.email_label),
                 value = state.email,
                 onValueChange = { onEvent(RegisterEvent.OnEmailChanged(it)) },
                 keyboardType = KeyboardType.Email,
-                hint = stringResource(R.string.email_hint)
+                hint = stringResource(R.string.email_hint),
+                imeAction = ImeAction.Next,
+                action = KeyboardActions(
+                    onNext = { passwordFocusRequester.requestFocus() }
+                )
             )
             Spacer(modifier = Modifier.height(8.dp))
             SecureTextField(
+                modifier = Modifier.focusRequester(passwordFocusRequester),
                 label = stringResource(R.string.password_label),
                 value = state.password,
                 onValueChange = { onEvent(RegisterEvent.OnPasswordChanged(it)) },
@@ -100,9 +125,9 @@ fun RegisterScreen(
             }
             TextButton(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { onNavigate(TODO("Navigasi ke LoginScreen")) }
+                onClick = { onNavigate(LoginScreen) }
             ) {
-                Text(stringResource(R.string.to_register))
+                Text(stringResource(R.string.to_login))
             }
         }
     }
