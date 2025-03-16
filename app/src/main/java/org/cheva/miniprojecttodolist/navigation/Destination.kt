@@ -9,4 +9,4 @@ object RegisterScreen
 object LoginScreen
 
 @Serializable
-object DashboardScreen
+data class DashboardScreen(val username: String)

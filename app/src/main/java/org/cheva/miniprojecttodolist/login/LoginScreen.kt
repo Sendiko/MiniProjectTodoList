@@ -75,8 +75,8 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(8.dp))
             OutlinedTextField(
                 label = stringResource(R.string.name_label),
-                value = state.email,
-                onValueChange = { onEvent(LoginEvent.OnEmailChanged(it)) },
+                value = state.name,
+                onValueChange = { onEvent(LoginEvent.OnNameChanged(it)) },
                 keyboardType = KeyboardType.Text,
                 hint = stringResource(R.string.name_hint),
                 imeAction = ImeAction.Next,
@@ -97,7 +97,7 @@ fun LoginScreen(
             )
             Button(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { onNavigate(DashboardScreen) }
+                onClick = { onNavigate(DashboardScreen(state.name)) }
             ) {
                 Text(stringResource(R.string.login_headline))
             }

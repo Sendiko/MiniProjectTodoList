@@ -12,7 +12,7 @@ class LoginViewModel: ViewModel() {
 
     fun onEvent(event: LoginEvent) {
         when(event){
-            is LoginEvent.OnEmailChanged -> changeEmail(event.email)
+            is LoginEvent.OnNameChanged -> changeEmail(event.name)
             is LoginEvent.OnPasswordChanged -> changePassword(event.password)
             is LoginEvent.OnPasswordVisibilityChanged -> changePasswordVisibility(event.isVisible)
             LoginEvent.OnDismissDialog -> dismissDialog()
@@ -22,7 +22,7 @@ class LoginViewModel: ViewModel() {
 
     private fun changeEmail(email: String) {
         _state.update {
-            it.copy(email = email)
+            it.copy(name = email)
         }
     }
 

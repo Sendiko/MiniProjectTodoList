@@ -10,6 +10,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import org.cheva.miniprojecttodolist.dashboard.presentation.DashboardScreen
 import org.cheva.miniprojecttodolist.dashboard.presentation.DashboardViewModel
 import org.cheva.miniprojecttodolist.login.LoginScreen
@@ -51,10 +52,12 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable<DashboardScreen> {
+                            val args = it.toRoute<DashboardScreen>()
                             val viewModel = viewModel<DashboardViewModel>()
                             val state by viewModel.state.collectAsStateWithLifecycle()
                             DashboardScreen(
                                 state = state,
+                                username = args.username,
                                 onEvent = viewModel::onEvent,
                                 onNavigate = { navController.navigate(it) }
                             )

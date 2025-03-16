@@ -32,6 +32,7 @@ import org.cheva.miniprojecttodolist.dashboard.presentation.component.TodoItem
 @Composable
 fun DashboardScreen(
     modifier: Modifier = Modifier,
+    username: String,
     state: DashboardState,
     onEvent: (DashboardEvent) -> Unit,
     onNavigate: (Any) -> Unit
@@ -41,7 +42,7 @@ fun DashboardScreen(
         topBar = {
             MediumTopAppBar(
                 title = {
-                    Text(stringResource(R.string.greeting, state.name))
+                    Text(stringResource(R.string.greeting, username))
                 },
                 actions = {
                     IconButton(
@@ -95,6 +96,7 @@ private fun DashboardScreenPrev() {
     DashboardScreen(
         state = DashboardState(todos = todos, name = "Sendiko"),
         onEvent = {  },
-        onNavigate = {  }
+        onNavigate = {  },
+        username = "Sendiko"
     )
 }
