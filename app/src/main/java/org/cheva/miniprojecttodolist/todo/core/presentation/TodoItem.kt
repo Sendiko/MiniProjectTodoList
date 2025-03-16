@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.dashboard.presentation.component
+package org.cheva.miniprojecttodolist.todo.core.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,7 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import org.cheva.miniprojecttodolist.dashboard.data.Todo
+import org.cheva.miniprojecttodolist.todo.core.data.Todo
+import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.CategoryIcon
 
 @Composable
 fun TodoItem(

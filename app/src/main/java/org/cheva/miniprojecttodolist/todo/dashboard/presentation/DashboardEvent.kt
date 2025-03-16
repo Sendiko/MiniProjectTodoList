@@ -1,6 +1,6 @@
-package org.cheva.miniprojecttodolist.dashboard.presentation
+package org.cheva.miniprojecttodolist.todo.dashboard.presentation
 
-import org.cheva.miniprojecttodolist.dashboard.data.Todo
+import org.cheva.miniprojecttodolist.todo.core.data.Todo
 
 sealed interface DashboardEvent {
     data class OnTodoChecked(val isChecked: Boolean): DashboardEvent

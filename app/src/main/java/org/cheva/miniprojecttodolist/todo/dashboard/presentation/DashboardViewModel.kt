@@ -1,10 +1,10 @@
-package org.cheva.miniprojecttodolist.dashboard.presentation
+package org.cheva.miniprojecttodolist.todo.dashboard.presentation
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import org.cheva.miniprojecttodolist.dashboard.data.Todo
+import org.cheva.miniprojecttodolist.todo.core.data.Todo
 
 class DashboardViewModel: ViewModel() {
 

@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.dashboard.presentation
+package org.cheva.miniprojecttodolist.todo.dashboard.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
@@ -23,9 +23,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.cheva.miniprojecttodolist.R
-import org.cheva.miniprojecttodolist.dashboard.data.Todo
-import org.cheva.miniprojecttodolist.dashboard.presentation.component.Category
-import org.cheva.miniprojecttodolist.dashboard.presentation.component.TodoItem
+import org.cheva.miniprojecttodolist.todo.core.data.Todo
+import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category
+import org.cheva.miniprojecttodolist.todo.core.presentation.TodoItem
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
