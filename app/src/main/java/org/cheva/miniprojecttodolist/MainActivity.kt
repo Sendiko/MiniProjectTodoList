@@ -16,8 +16,11 @@ import org.cheva.miniprojecttodolist.login.LoginViewModel
 import org.cheva.miniprojecttodolist.navigation.DashboardScreen
 import org.cheva.miniprojecttodolist.navigation.LoginScreen
 import org.cheva.miniprojecttodolist.navigation.RegisterScreen
+import org.cheva.miniprojecttodolist.navigation.TodoScreen
 import org.cheva.miniprojecttodolist.register.RegisterScreen
 import org.cheva.miniprojecttodolist.register.RegisterViewModel
+import org.cheva.miniprojecttodolist.todo.main.presentation.TodoScreen
+import org.cheva.miniprojecttodolist.todo.main.presentation.TodoViewModel
 import org.cheva.miniprojecttodolist.todo.dashboard.presentation.DashboardScreen
 import org.cheva.miniprojecttodolist.todo.dashboard.presentation.DashboardViewModel
 import org.cheva.miniprojecttodolist.ui.theme.MiniProjectTodoListTheme
@@ -62,7 +65,15 @@ class MainActivity : ComponentActivity() {
                                 onNavigate = { navController.navigate(it) }
                             )
                         }
-
+                        composable<TodoScreen> {
+                            val viewModel = viewModel<TodoViewModel>()
+                            val state by viewModel.state.collectAsStateWithLifecycle()
+                            TodoScreen(
+                                state = state,
+                                onEvent = viewModel::onEvent,
+                                onNavigate = { navController.navigate(it) }
+                            )
+                        }
                     }
                 )
             }

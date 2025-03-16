@@ -10,3 +10,6 @@ object LoginScreen
 
 @Serializable
 data class DashboardScreen(val username: String)
+
+@Serializable
+object TodoScreen

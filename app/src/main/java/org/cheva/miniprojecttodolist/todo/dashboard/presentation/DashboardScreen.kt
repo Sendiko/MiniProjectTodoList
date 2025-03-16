@@ -2,7 +2,6 @@ package org.cheva.miniprojecttodolist.todo.dashboard.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -23,9 +22,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.cheva.miniprojecttodolist.R
+import org.cheva.miniprojecttodolist.navigation.TodoScreen
 import org.cheva.miniprojecttodolist.todo.core.data.Todo
+import org.cheva.miniprojecttodolist.todo.main.presentation.TodoItem
 import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category
-import org.cheva.miniprojecttodolist.todo.core.presentation.TodoItem
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,7 +58,7 @@ fun DashboardScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { /*TODO*/ }) {
+            FloatingActionButton(onClick = { onNavigate(TodoScreen) }) {
                 Icon(
                     imageVector = Icons.Filled.Add,
                     contentDescription = null
@@ -68,9 +68,9 @@ fun DashboardScreen(
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
-                .padding(paddingValues)
                 .nestedScroll(scrollBehavior.nestedScrollConnection),
-            verticalArrangement = Arrangement.spacedBy(space = 16.dp)
+            verticalArrangement = Arrangement.spacedBy(space = 16.dp),
+            contentPadding = paddingValues
         ) {
             items(state.todos) {
                 TodoItem(

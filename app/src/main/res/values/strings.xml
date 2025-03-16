@@ -19,4 +19,10 @@
     <string name="to_login">Sudah punya akun? Login disini</string>
     <!--  String untuk DashboardScreen  -->
     <string name="greeting">Halo, %1$s</string>
+    <!--  String untuk TodoScreen  -->
+    <string name="todo_label">Buat tugas</string>
+    <string name="title_label">Judul</string>
+    <string name="desc_label">Deskripsi</string>
+    <string name="category_label">Kategori</string>
+    <string name="save_todo">Simpan tugas</string>
 </resources>
