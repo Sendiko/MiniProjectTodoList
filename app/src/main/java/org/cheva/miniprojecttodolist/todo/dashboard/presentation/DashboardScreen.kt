@@ -23,9 +23,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.cheva.miniprojecttodolist.R
 import org.cheva.miniprojecttodolist.navigation.TodoScreen
-import org.cheva.miniprojecttodolist.todo.core.data.Todo
+import org.cheva.miniprojecttodolist.todo.dashboard.data.todos
 import org.cheva.miniprojecttodolist.todo.main.presentation.TodoItem
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -72,7 +71,7 @@ fun DashboardScreen(
             verticalArrangement = Arrangement.spacedBy(space = 16.dp),
             contentPadding = paddingValues
         ) {
-            items(state.todos) {
+            items(todos) {
                 TodoItem(
                     todo = it,
                     onCheckedChange = { onEvent(DashboardEvent.OnTodoChecked(it)) },
@@ -86,13 +85,6 @@ fun DashboardScreen(
 @Preview(showSystemUi = true)
 @Composable
 private fun DashboardScreenPrev() {
-    val todos = listOf(
-        Todo(title = "asbc", description = "lksdjflsdlk;ajdfklsdjfskl;dfjklsdjfskl;dfjaskl;dfj;ljfaj", isCompleted = true, category = Category.EDUCATION),
-        Todo(title = "asbc", description = "lksdjflsd", isCompleted = true, category = Category.WORK),
-        Todo(title = "asbc", description = "lksdjflsd", isCompleted = false, category = Category.HOBBY),
-        Todo(title = "asbc", description = "lksdjflsd", isCompleted = false, category = Category.COMPETITION),
-        Todo(title = "asbc", description = "lksdjflsd", isCompleted = true, category = Category.GOALS),
-    )
     DashboardScreen(
         state = DashboardState(todos = todos, name = "Sendiko"),
         onEvent = {  },
