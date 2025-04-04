@@ -54,6 +54,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose) // dependency navigation
     implementation(libs.kotlinx.serialization.json) // dependency untuk support navigation
     implementation(libs.androidx.material.icons.extended) // dependency icon
+    implementation(libs.com.squareup.retrofit2.retrofit) // dependency retrofit
+    implementation(libs.com.squareup.retrofit2.converter.gson) // dependency converter gson
+    implementation(libs.com.squareup.okhttp3.okhttp) // dependency okhttp3
+    implementation(libs.com.squareup.okhttp3.logging.interceptor) // dependency logging interceptor
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
