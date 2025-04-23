@@ -26,8 +26,14 @@ class DashboardViewModel: ViewModel() {
         }
     }
 
+    fun setNameAndToken(username: String, token: String) {
+        _state.update {
+            it.copy(name = username, token = token)
+        }
+    }
+
     private fun getTodos() {
-        val token = "Bearer"
+        val token = "Bearer ${state.value.token}"
         viewModelScope.launch {
             apiService.getTodos(token)
                 .enqueue(

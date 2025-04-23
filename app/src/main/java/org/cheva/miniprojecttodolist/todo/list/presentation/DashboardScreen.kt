@@ -30,8 +30,6 @@ import org.cheva.miniprojecttodolist.todo.main.presentation.TodoItem
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(
-    modifier: Modifier = Modifier,
-    username: String,
     state: DashboardState,
     onEvent: (DashboardEvent) -> Unit,
     onNavigate: (Any) -> Unit
@@ -48,7 +46,7 @@ fun DashboardScreen(
         topBar = {
             MediumTopAppBar(
                 title = {
-                    Text(stringResource(R.string.greeting, username))
+                    Text(stringResource(R.string.greeting, state.name))
                 },
                 actions = {
                     IconButton(
@@ -96,6 +94,5 @@ private fun DashboardScreenPrev() {
         state = DashboardState(todos = emptyList(), name = "Sendiko"),
         onEvent = {  },
         onNavigate = {  },
-        username = "Sendiko"
     )
 }
