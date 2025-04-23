@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.ui.theme
+package org.cheva.miniprojecttodolist.core.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

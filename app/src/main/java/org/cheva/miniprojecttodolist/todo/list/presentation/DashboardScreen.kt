@@ -23,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.cheva.miniprojecttodolist.R
-import org.cheva.miniprojecttodolist.navigation.TodoScreen
+import org.cheva.miniprojecttodolist.core.navigation.TodoScreen
 import org.cheva.miniprojecttodolist.todo.main.presentation.TodoItem
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")

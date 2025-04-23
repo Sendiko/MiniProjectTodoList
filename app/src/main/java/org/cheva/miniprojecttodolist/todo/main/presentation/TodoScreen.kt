@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.cheva.miniprojecttodolist.R
-import org.cheva.miniprojecttodolist.ui.components.OutlinedTextField
+import org.cheva.miniprojecttodolist.core.ui.components.OutlinedTextField
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.network
+package org.cheva.miniprojecttodolist.core.network
 
 import org.cheva.miniprojecttodolist.register.data.RegisterRequest
 import org.cheva.miniprojecttodolist.register.data.RegisterResponse

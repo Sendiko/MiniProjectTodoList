@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.ui.components
+package org.cheva.miniprojecttodolist.core.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

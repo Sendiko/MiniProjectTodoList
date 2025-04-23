@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.network
+package org.cheva.miniprojecttodolist.core.network
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

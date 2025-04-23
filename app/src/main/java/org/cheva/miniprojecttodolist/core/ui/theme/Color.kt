@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.ui.theme
+package org.cheva.miniprojecttodolist.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

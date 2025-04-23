@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist
+package org.cheva.miniprojecttodolist.core
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,19 +11,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import org.cheva.miniprojecttodolist.core.navigation.DashboardScreen
+import org.cheva.miniprojecttodolist.core.navigation.LoginScreen
+import org.cheva.miniprojecttodolist.core.navigation.RegisterScreen
+import org.cheva.miniprojecttodolist.core.navigation.TodoScreen
+import org.cheva.miniprojecttodolist.core.ui.theme.MiniProjectTodoListTheme
 import org.cheva.miniprojecttodolist.login.LoginScreen
 import org.cheva.miniprojecttodolist.login.LoginViewModel
-import org.cheva.miniprojecttodolist.navigation.DashboardScreen
-import org.cheva.miniprojecttodolist.navigation.LoginScreen
-import org.cheva.miniprojecttodolist.navigation.RegisterScreen
-import org.cheva.miniprojecttodolist.navigation.TodoScreen
 import org.cheva.miniprojecttodolist.register.RegisterScreen
 import org.cheva.miniprojecttodolist.register.RegisterViewModel
 import org.cheva.miniprojecttodolist.todo.list.presentation.DashboardScreen
 import org.cheva.miniprojecttodolist.todo.list.presentation.DashboardViewModel
 import org.cheva.miniprojecttodolist.todo.main.presentation.TodoScreen
 import org.cheva.miniprojecttodolist.todo.main.presentation.TodoViewModel
-import org.cheva.miniprojecttodolist.ui.theme.MiniProjectTodoListTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

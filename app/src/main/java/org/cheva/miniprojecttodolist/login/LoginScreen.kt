@@ -27,16 +27,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.cheva.miniprojecttodolist.R
-import org.cheva.miniprojecttodolist.navigation.DashboardScreen
-import org.cheva.miniprojecttodolist.navigation.RegisterScreen
-import org.cheva.miniprojecttodolist.ui.components.OutlinedTextField
-import org.cheva.miniprojecttodolist.ui.components.ResultDialog
-import org.cheva.miniprojecttodolist.ui.components.SecureTextField
+import org.cheva.miniprojecttodolist.core.navigation.DashboardScreen
+import org.cheva.miniprojecttodolist.core.navigation.RegisterScreen
+import org.cheva.miniprojecttodolist.core.ui.components.OutlinedTextField
+import org.cheva.miniprojecttodolist.core.ui.components.ResultDialog
+import org.cheva.miniprojecttodolist.core.ui.components.SecureTextField
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LoginScreen(
-    modifier: Modifier = Modifier,
     state: LoginState,
     onEvent: (LoginEvent) -> Unit,
     onNavigate: (Any) -> Unit

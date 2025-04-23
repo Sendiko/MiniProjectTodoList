@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.navigation
+package org.cheva.miniprojecttodolist.core.navigation
 
 import kotlinx.serialization.Serializable
 

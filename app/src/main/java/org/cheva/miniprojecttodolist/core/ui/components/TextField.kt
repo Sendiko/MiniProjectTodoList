@@ -1,15 +1,10 @@
-package org.cheva.miniprojecttodolist.ui.components
+package org.cheva.miniprojecttodolist.core.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -19,26 +14,44 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import org.cheva.miniprojecttodolist.R
 
+/**
+ *
+ * Custom OutlinedTextField that comes with the starter code.
+ *
+ * @param modifier Modifier yang akan diberikan ke OutlinedTextField.
+ * @param label String untuk text yang ditampilkan diatas OutlinedTextField/
+ * @param value String yang akan ditampilkan dalam OutlinedTextField.
+ * @param onValueChange Fungsi yang akan dipanggil ketika value berubah.
+ * @param isError Boolean yang menentukan apakah OutlinedTextField memiliki error atau tidak.
+ * @param hint String yang akan ditampilkan sebagai hint jika value kosong.
+ * @param supportingText text kecil yang akan ditampilkan dibawah OutlinedTextField.
+ * @param leadingIcon Icon yang akan ditampilkan di sebelah kiri dari OutlinedTextField.
+ * @param trailingIcon Icon yang akan ditampilkan di sebelah kanan dari OutlinedTextField.
+ * @param singleLine Parameter yang membuat textfield menjadi single line.
+ * @param maxLines Jumlah maksimal baris yang dapat ditampilkan dalam textfield.
+ * @param minLines Jumlah minimal baris yang dapat ditampilkan dalam textfield.
+ * @param readOnly Parameter yang menentukan apakah textfield hanya bisa dibaca atau tidak.
+ * @param enabled Parameter yang menentukan apakah textfield aktif atau tidak.
+ * @param keyboardType Jenis keyboard yang akan ditampilkan dalam textfield.
+ * @param imeAction Jenis aksi untuk tombol Enter.
+ * @param action Aksi yang akan diambil ketika tombol keyboard ditekan.
+ *
+* */
 @Composable
-fun SecureTextField(
+fun OutlinedTextField(
     modifier: Modifier = Modifier,
     label: String,
     value: String,
     onValueChange: (String) -> Unit,
-    isVisible: Boolean,
-    onVisibilityChange: (Boolean) -> Unit,
     isError: Boolean = false,
     hint: String? = null,
     supportingText: String? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
     singleLine: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
     minLines: Int = 1,
@@ -73,20 +86,7 @@ fun SecureTextField(
                     Text(text = supportingText)
                 }
             },
-            trailingIcon = {
-                IconButton(
-                    onClick = { onVisibilityChange(!isVisible) }
-                ) {
-                    Icon(
-                        imageVector = if (isVisible)
-                            Icons.Filled.VisibilityOff
-                        else Icons.Filled.Visibility,
-                        contentDescription = if (isVisible)
-                            stringResource(R.string.visibility_on)
-                        else stringResource(R.string.visibility_off)
-                    )
-                }
-            },
+            trailingIcon = trailingIcon,
             leadingIcon = leadingIcon,
             singleLine = singleLine,
             maxLines = maxLines,
@@ -98,16 +98,12 @@ fun SecureTextField(
                 imeAction = imeAction,
             ),
             keyboardActions = action,
-            visualTransformation = if (isVisible)
-                    VisualTransformation.None
-                else
-                    PasswordVisualTransformation(),
             colors = OutlinedTextFieldDefaults.colors(
                 unfocusedContainerColor = MaterialTheme.colorScheme.surfaceVariant,
                 focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 unfocusedBorderColor = MaterialTheme.colorScheme.surfaceVariant,
                 focusedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
-            )
+            ),
         )
     }
 }

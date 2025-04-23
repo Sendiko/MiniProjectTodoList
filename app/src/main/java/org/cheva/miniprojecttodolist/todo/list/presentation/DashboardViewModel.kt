@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.cheva.miniprojecttodolist.network.Retrofit
+import org.cheva.miniprojecttodolist.core.network.Retrofit
 import org.cheva.miniprojecttodolist.todo.list.data.GetTodosResponse
 import retrofit2.Call
 import retrofit2.Callback
