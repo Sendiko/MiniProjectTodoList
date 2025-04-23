@@ -45,7 +45,7 @@ fun LoginScreen(
 
     LaunchedEffect(state.successLogin) {
         if (state.successLogin) {
-            onNavigate(DashboardScreen(state.name))
+            onNavigate(DashboardScreen(state.name, state.token))
         }
     }
     Scaffold {

@@ -76,7 +76,8 @@ class LoginViewModel : ViewModel() {
                                     it.copy(
                                         successLogin = true,
                                         message = "Berhasil Login!",
-                                        name = response.body()?.user?.name ?: ""
+                                        name = response.body()?.user?.name ?: "",
+                                        token = response.body()?.user?.token ?: ""
                                     )
                                 }
 
