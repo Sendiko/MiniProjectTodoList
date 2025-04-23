@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.todo.dashboard.presentation
+package org.cheva.miniprojecttodolist.todo.list.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement

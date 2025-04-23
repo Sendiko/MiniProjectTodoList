@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.todo.dashboard.data
+package org.cheva.miniprojecttodolist.todo.list.data
 
 import com.google.gson.annotations.SerializedName
 

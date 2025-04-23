@@ -1,6 +1,6 @@
 package org.cheva.miniprojecttodolist.todo.core.data
 
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category
 
 data class Todo(
     val title: String = "",

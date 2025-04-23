@@ -2,7 +2,7 @@ package org.cheva.miniprojecttodolist.network
 
 import org.cheva.miniprojecttodolist.register.data.RegisterRequest
 import org.cheva.miniprojecttodolist.register.data.RegisterResponse
-import org.cheva.miniprojecttodolist.todo.dashboard.data.GetTodosResponse
+import org.cheva.miniprojecttodolist.todo.list.data.GetTodosResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

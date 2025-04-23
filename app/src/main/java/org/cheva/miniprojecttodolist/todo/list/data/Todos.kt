@@ -1,7 +1,7 @@
-package org.cheva.miniprojecttodolist.todo.dashboard.data
+package org.cheva.miniprojecttodolist.todo.list.data
 
 import org.cheva.miniprojecttodolist.todo.core.data.Todo
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category
 
 val todos = listOf(
     Todo(title = "asbc", description = "lksdjflsdlk;ajdfklsdjfskl;dfjklsdjfskl;dfjaskl;dfj;ljfaj", isCompleted = true, category = Category.EDUCATION),

@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.todo.dashboard.presentation.component
+package org.cheva.miniprojecttodolist.todo.list.presentation.component
 
 enum class Category {
     COMPETITION,

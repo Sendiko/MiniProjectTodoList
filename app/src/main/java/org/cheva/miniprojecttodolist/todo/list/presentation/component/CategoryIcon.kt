@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.todo.dashboard.presentation.component
+package org.cheva.miniprojecttodolist.todo.list.presentation.component
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -12,16 +12,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.cheva.miniprojecttodolist.R
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category.COMPETITION
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category.EDUCATION
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category.GAS
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category.GOALS
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category.GROCERIES
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category.HEALTH
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category.HOBBY
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category.SPORTS
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category.SUBSCRIPTION
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category.WORK
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category.COMPETITION
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category.EDUCATION
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category.GAS
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category.GOALS
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category.GROCERIES
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category.HEALTH
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category.HOBBY
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category.SPORTS
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category.SUBSCRIPTION
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category.WORK
 
 @Composable
 fun CategoryIcon(

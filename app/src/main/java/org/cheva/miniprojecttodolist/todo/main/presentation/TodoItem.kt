@@ -12,12 +12,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import org.cheva.miniprojecttodolist.todo.core.data.Todo
-import org.cheva.miniprojecttodolist.todo.dashboard.data.TodosItem
-import org.cheva.miniprojecttodolist.todo.dashboard.data.todos
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.CategoryIcon
+import org.cheva.miniprojecttodolist.todo.list.data.TodosItem
 
 @Composable
 fun TodoItem(

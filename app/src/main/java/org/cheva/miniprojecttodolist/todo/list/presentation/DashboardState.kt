@@ -1,6 +1,6 @@
-package org.cheva.miniprojecttodolist.todo.dashboard.presentation
+package org.cheva.miniprojecttodolist.todo.list.presentation
 
-import org.cheva.miniprojecttodolist.todo.dashboard.data.TodosItem
+import org.cheva.miniprojecttodolist.todo.list.data.TodosItem
 
 data class DashboardState(
     val name: String = "",

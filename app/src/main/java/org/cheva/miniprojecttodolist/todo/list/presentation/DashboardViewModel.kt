@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.todo.dashboard.presentation
+package org.cheva.miniprojecttodolist.todo.list.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.cheva.miniprojecttodolist.network.Retrofit
-import org.cheva.miniprojecttodolist.todo.dashboard.data.GetTodosResponse
+import org.cheva.miniprojecttodolist.todo.list.data.GetTodosResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

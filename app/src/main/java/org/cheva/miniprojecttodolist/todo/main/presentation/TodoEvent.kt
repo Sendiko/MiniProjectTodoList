@@ -1,6 +1,6 @@
 package org.cheva.miniprojecttodolist.todo.main.presentation
 
-import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.Category
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category
 
 sealed interface TodoEvent {
     data class OnTitleChanged(val title: String): TodoEvent

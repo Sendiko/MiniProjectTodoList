@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.todo.dashboard.presentation
+package org.cheva.miniprojecttodolist.todo.list.presentation
 
 import org.cheva.miniprojecttodolist.todo.core.data.Todo
 
