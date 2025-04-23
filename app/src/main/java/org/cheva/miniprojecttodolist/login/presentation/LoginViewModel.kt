@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.login
+package org.cheva.miniprojecttodolist.login.presentation
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

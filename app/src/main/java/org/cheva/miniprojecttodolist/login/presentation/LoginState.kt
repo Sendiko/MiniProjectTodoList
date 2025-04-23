@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.login
+package org.cheva.miniprojecttodolist.login.presentation
 
 data class LoginState(
     val name: String = "",

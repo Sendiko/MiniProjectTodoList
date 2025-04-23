@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.login
+package org.cheva.miniprojecttodolist.login.presentation
 
 sealed interface LoginEvent {
     data class OnNameChanged(val name: String): LoginEvent

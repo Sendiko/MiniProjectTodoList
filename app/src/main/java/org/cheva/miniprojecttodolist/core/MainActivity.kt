@@ -16,8 +16,8 @@ import org.cheva.miniprojecttodolist.core.navigation.LoginScreen
 import org.cheva.miniprojecttodolist.core.navigation.RegisterScreen
 import org.cheva.miniprojecttodolist.core.navigation.TodoScreen
 import org.cheva.miniprojecttodolist.core.ui.theme.MiniProjectTodoListTheme
-import org.cheva.miniprojecttodolist.login.LoginScreen
-import org.cheva.miniprojecttodolist.login.LoginViewModel
+import org.cheva.miniprojecttodolist.login.presentation.LoginScreen
+import org.cheva.miniprojecttodolist.login.presentation.LoginViewModel
 import org.cheva.miniprojecttodolist.register.RegisterScreen
 import org.cheva.miniprojecttodolist.register.RegisterViewModel
 import org.cheva.miniprojecttodolist.todo.list.presentation.DashboardScreen

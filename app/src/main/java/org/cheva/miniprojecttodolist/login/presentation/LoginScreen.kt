@@ -1,4 +1,4 @@
-package org.cheva.miniprojecttodolist.login
+package org.cheva.miniprojecttodolist.login.presentation
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
