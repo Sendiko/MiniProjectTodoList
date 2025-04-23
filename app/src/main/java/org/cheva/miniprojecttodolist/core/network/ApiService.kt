@@ -1,5 +1,7 @@
 package org.cheva.miniprojecttodolist.core.network
 
+import org.cheva.miniprojecttodolist.login.data.LoginRequest
+import org.cheva.miniprojecttodolist.login.data.LoginResponse
 import org.cheva.miniprojecttodolist.register.data.RegisterRequest
 import org.cheva.miniprojecttodolist.register.data.RegisterResponse
 import org.cheva.miniprojecttodolist.todo.list.data.GetTodosResponse
@@ -15,6 +17,11 @@ interface ApiService {
     fun register(
         @Body request: RegisterRequest
     ): Call<RegisterResponse>
+
+    @POST("login")
+    fun login(
+        @Body request: LoginRequest
+    ): Call<LoginResponse>
 
     @GET("todo")
     fun getTodos(
