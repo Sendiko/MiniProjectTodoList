@@ -58,9 +58,11 @@ class MainActivity : ComponentActivity() {
                             val args = it.toRoute<DashboardScreen>()
                             val viewModel = viewModel<DashboardViewModel>()
                             val state by viewModel.state.collectAsStateWithLifecycle()
+
+                            viewModel.setNameAndToken(args.username, args.token)
+
                             DashboardScreen(
                                 state = state,
-                                username = args.username,
                                 onEvent = viewModel::onEvent,
                                 onNavigate = { navController.navigate(it) }
                             )
