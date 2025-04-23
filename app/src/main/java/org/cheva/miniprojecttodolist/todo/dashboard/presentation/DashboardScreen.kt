@@ -16,6 +16,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
@@ -23,7 +24,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.cheva.miniprojecttodolist.R
 import org.cheva.miniprojecttodolist.navigation.TodoScreen
-import org.cheva.miniprojecttodolist.todo.dashboard.data.todos
 import org.cheva.miniprojecttodolist.todo.main.presentation.TodoItem
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -37,6 +37,13 @@ fun DashboardScreen(
     onNavigate: (Any) -> Unit
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
+    LaunchedEffect(state.todos) {
+        if (state.todos.isEmpty()) {
+            onEvent(DashboardEvent.OnLoadTodo)
+        }
+    }
+
     Scaffold(
         topBar = {
             MediumTopAppBar(
@@ -71,7 +78,7 @@ fun DashboardScreen(
             verticalArrangement = Arrangement.spacedBy(space = 16.dp),
             contentPadding = paddingValues
         ) {
-            items(todos) {
+            items(state.todos) {
                 TodoItem(
                     todo = it,
                     onCheckedChange = { onEvent(DashboardEvent.OnTodoChecked(it)) },
@@ -86,7 +93,7 @@ fun DashboardScreen(
 @Composable
 private fun DashboardScreenPrev() {
     DashboardScreen(
-        state = DashboardState(todos = todos, name = "Sendiko"),
+        state = DashboardState(todos = emptyList(), name = "Sendiko"),
         onEvent = {  },
         onNavigate = {  },
         username = "Sendiko"

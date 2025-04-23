@@ -12,13 +12,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.cheva.miniprojecttodolist.todo.core.data.Todo
+import org.cheva.miniprojecttodolist.todo.dashboard.data.TodosItem
+import org.cheva.miniprojecttodolist.todo.dashboard.data.todos
 import org.cheva.miniprojecttodolist.todo.dashboard.presentation.component.CategoryIcon
 
 @Composable
 fun TodoItem(
-    todo: Todo,
+    todo: TodosItem,
     onCheckedChange: (Boolean) -> Unit,
     onTodoClick: () -> Unit,
 ) {
@@ -26,19 +29,19 @@ fun TodoItem(
         onClick = onTodoClick
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            CategoryIcon(category = todo.category)
             Column(
                 modifier = Modifier.weight(1f)
             ) {
                 Text(text = todo.title, style = MaterialTheme.typography.titleMedium)
                 Text(text = todo.description, style = MaterialTheme.typography.bodyLarge)
             }
-            Checkbox(checked = todo.isCompleted, onCheckedChange = onCheckedChange)
+            Checkbox(checked = todo.isDone, onCheckedChange = onCheckedChange)
         }
     }
 }

@@ -46,9 +46,9 @@ fun RegisterScreen(
     val emailFocusRequester = FocusRequester()
     val passwordFocusRequester = FocusRequester()
     LaunchedEffect(state.successRegister) {
-        if (state.successRegister){
+        if (state.successRegister) {
             delay(1000)
-            onNavigate(DashboardScreen)
+            onNavigate(DashboardScreen(username = state.name))
         }
     }
     Scaffold {

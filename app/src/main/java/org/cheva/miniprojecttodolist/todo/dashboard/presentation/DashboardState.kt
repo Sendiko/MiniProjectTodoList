@@ -1,9 +1,9 @@
 package org.cheva.miniprojecttodolist.todo.dashboard.presentation
 
-import org.cheva.miniprojecttodolist.todo.core.data.Todo
+import org.cheva.miniprojecttodolist.todo.dashboard.data.TodosItem
 
 data class DashboardState(
     val name: String = "",
-    val todos: List<Todo> = emptyList(),
-    val todo: Todo? = null,
+    val todos: List<TodosItem> = emptyList(),
+    val todo: TodosItem? = null,
 )

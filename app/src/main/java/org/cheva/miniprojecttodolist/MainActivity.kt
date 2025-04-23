@@ -19,10 +19,10 @@ import org.cheva.miniprojecttodolist.navigation.RegisterScreen
 import org.cheva.miniprojecttodolist.navigation.TodoScreen
 import org.cheva.miniprojecttodolist.register.RegisterScreen
 import org.cheva.miniprojecttodolist.register.RegisterViewModel
-import org.cheva.miniprojecttodolist.todo.main.presentation.TodoScreen
-import org.cheva.miniprojecttodolist.todo.main.presentation.TodoViewModel
 import org.cheva.miniprojecttodolist.todo.dashboard.presentation.DashboardScreen
 import org.cheva.miniprojecttodolist.todo.dashboard.presentation.DashboardViewModel
+import org.cheva.miniprojecttodolist.todo.main.presentation.TodoScreen
+import org.cheva.miniprojecttodolist.todo.main.presentation.TodoViewModel
 import org.cheva.miniprojecttodolist.ui.theme.MiniProjectTodoListTheme
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = RegisterScreen,
+                    startDestination = DashboardScreen("Sendiko"),
                     builder = {
                         composable<RegisterScreen> {
                             val viewModel = viewModel<RegisterViewModel>()
