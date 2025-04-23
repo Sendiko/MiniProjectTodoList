@@ -48,7 +48,7 @@ fun RegisterScreen(
     LaunchedEffect(state.successRegister) {
         if (state.successRegister) {
             delay(1000)
-            onNavigate(DashboardScreen(username = state.name))
+            onNavigate(DashboardScreen)
         }
     }
     Scaffold {
