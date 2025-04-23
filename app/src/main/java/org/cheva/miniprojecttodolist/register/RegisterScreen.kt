@@ -29,7 +29,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import org.cheva.miniprojecttodolist.R
-import org.cheva.miniprojecttodolist.core.navigation.DashboardScreen
 import org.cheva.miniprojecttodolist.core.navigation.LoginScreen
 import org.cheva.miniprojecttodolist.core.ui.components.OutlinedTextField
 import org.cheva.miniprojecttodolist.core.ui.components.ResultDialog
@@ -48,7 +47,7 @@ fun RegisterScreen(
     LaunchedEffect(state.successRegister) {
         if (state.successRegister) {
             delay(1000)
-            onNavigate(DashboardScreen)
+            onNavigate(LoginScreen)
         }
     }
     Scaffold {
