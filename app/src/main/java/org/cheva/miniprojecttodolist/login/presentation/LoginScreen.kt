@@ -16,6 +16,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -41,6 +42,12 @@ fun LoginScreen(
     onNavigate: (Any) -> Unit
 ) {
     val focusRequester = FocusRequester()
+
+    LaunchedEffect(state.successLogin) {
+        if (state.successLogin) {
+            onNavigate(DashboardScreen(state.name))
+        }
+    }
     Scaffold {
         if (state.message.isNotBlank()) {
             ResultDialog(
@@ -73,11 +80,11 @@ fun LoginScreen(
             )
             Spacer(modifier = Modifier.height(8.dp))
             OutlinedTextField(
-                label = stringResource(R.string.name_label),
-                value = state.name,
-                onValueChange = { onEvent(LoginEvent.OnNameChanged(it)) },
-                keyboardType = KeyboardType.Text,
-                hint = stringResource(R.string.name_hint),
+                label = stringResource(R.string.email_label),
+                value = state.email,
+                onValueChange = { onEvent(LoginEvent.OnEmailChanged(it)) },
+                keyboardType = KeyboardType.Email,
+                hint = stringResource(R.string.email_hint),
                 imeAction = ImeAction.Next,
                 action = KeyboardActions(
                     onNext = { focusRequester.requestFocus() }
@@ -96,7 +103,7 @@ fun LoginScreen(
             )
             Button(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { onNavigate(DashboardScreen(state.name)) }
+                onClick = { onEvent(LoginEvent.OnLoginClicked) }
             ) {
                 Text(stringResource(R.string.login_headline))
             }
