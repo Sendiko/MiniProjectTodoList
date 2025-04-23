@@ -27,7 +27,7 @@ class DashboardViewModel: ViewModel() {
     }
 
     private fun getTodos() {
-        val token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidmVsYXJpbmEiLCJpYXQiOjE3NDQ1MTg2OTJ9.6Ti2E6yEd0L3RrNwKv2GdNwnqex_2IqxAITxt9XzWHY"
+        val token = "Bearer"
         viewModelScope.launch {
             apiService.getTodos(token)
                 .enqueue(
