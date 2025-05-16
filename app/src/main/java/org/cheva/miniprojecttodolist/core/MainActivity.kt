@@ -11,6 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import org.cheva.miniprojecttodolist.core.di.TodoApp
+import org.cheva.miniprojecttodolist.core.di.createViewModel
 import org.cheva.miniprojecttodolist.core.navigation.DashboardScreen
 import org.cheva.miniprojecttodolist.core.navigation.LoginScreen
 import org.cheva.miniprojecttodolist.core.navigation.RegisterScreen
@@ -56,7 +58,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable<DashboardScreen> {
                             val args = it.toRoute<DashboardScreen>()
-                            val viewModel = viewModel<DashboardViewModel>()
+                                val viewModel = viewModel<DashboardViewModel>(
+                                    factory = createViewModel { DashboardViewModel(TodoApp().appContext) }
+                                )
                             val state by viewModel.state.collectAsStateWithLifecycle()
 
                             viewModel.setNameAndToken(args.username, args.token)
