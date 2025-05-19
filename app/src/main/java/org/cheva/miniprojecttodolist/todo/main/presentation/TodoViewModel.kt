@@ -1,15 +1,33 @@
 package org.cheva.miniprojecttodolist.todo.main.presentation
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import org.cheva.miniprojecttodolist.core.network.Retrofit
+import org.cheva.miniprojecttodolist.core.preferences.AppPreferences
+import org.cheva.miniprojecttodolist.core.preferences.dataStore
 import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category
+import org.cheva.miniprojecttodolist.todo.main.data.post.PostTodoRequest
+import org.cheva.miniprojecttodolist.todo.main.data.post.PostTodoResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class TodoViewModel: ViewModel() {
+class TodoViewModel(app: Application): AndroidViewModel(app) {
 
+    private val apiService = Retrofit.getInstance()
+    private val preferences = AppPreferences(app.dataStore)
+    private val _token = preferences.getToken()
     private val _state = MutableStateFlow(TodoState())
-    val state = _state.asStateFlow()
+    val state = combine(_token, _state) { token, state ->
+        state.copy(token = token)
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), TodoState())
 
     fun onEvent(event: TodoEvent) {
         when (event) {
@@ -17,7 +35,12 @@ class TodoViewModel: ViewModel() {
             is TodoEvent.OnDescriptionChanged -> changeDescription(event.description)
             is TodoEvent.OnCategoryChanged -> changeCategory(event.category)
             TodoEvent.OnSaveTodoClicked -> saveTodo()
+            is TodoEvent.OnDropdownChanged -> changeDropdown(event.isExpanded)
         }
+    }
+
+    private fun changeDropdown(isExpanded: Boolean) {
+        _state.update { it.copy(isSelectingCategory = isExpanded) }
     }
 
     private fun changeTitle(title: String) {
@@ -39,6 +62,46 @@ class TodoViewModel: ViewModel() {
     }
 
     private fun saveTodo() {
-        TODO("Store todo via Retrofit")
+        viewModelScope.launch {
+            val request = PostTodoRequest(
+                description = state.value.description,
+                title = state.value.title,
+                category = state.value.category.toString(),
+                isDone = true
+            )
+            apiService.postTodo(
+                request = request,
+                token = "Bearer ${state.value.token}"
+            ).enqueue(
+                object : Callback<PostTodoResponse> {
+                    override fun onResponse(
+                        call: Call<PostTodoResponse?>,
+                        response: Response<PostTodoResponse?>
+                    ) {
+                        when(response.code()) {
+                            201 -> _state.update {
+                                it.copy(successPost = true)
+                            }
+                            401 -> _state.update {
+                                it.copy(successPost = false, message = "Unauthorized")
+                            }
+                            500 -> _state.update {
+                                it.copy(successPost = false, message = "Internal Server Error")
+                            }
+                        }
+                    }
+
+                    override fun onFailure(
+                        call: Call<PostTodoResponse?>,
+                        t: Throwable
+                    ) {
+                        _state.update {
+                            it.copy(successPost = false, message = "Internal Server Error")
+                        }
+                    }
+
+                }
+            )
+        }
     }
 }

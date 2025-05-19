@@ -6,5 +6,6 @@ sealed interface TodoEvent {
     data class OnTitleChanged(val title: String): TodoEvent
     data class OnDescriptionChanged(val description: String): TodoEvent
     data class OnCategoryChanged(val category: Category): TodoEvent
+    data class OnDropdownChanged(val isExpanded: Boolean): TodoEvent
     object OnSaveTodoClicked: TodoEvent
 }

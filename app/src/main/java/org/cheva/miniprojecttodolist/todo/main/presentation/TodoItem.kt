@@ -14,6 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.cheva.miniprojecttodolist.todo.list.data.TodosItem
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category
+import org.cheva.miniprojecttodolist.todo.list.presentation.component.CategoryIcon
 
 @Composable
 fun TodoItem(
@@ -31,6 +33,9 @@ fun TodoItem(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            CategoryIcon(
+                category = Category.valueOf(todo.category)
+            )
             Column(
                 modifier = Modifier.weight(1f)
             ) {
