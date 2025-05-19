@@ -1,23 +1,32 @@
 package org.cheva.miniprojecttodolist.login.presentation
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.cheva.miniprojecttodolist.core.network.Retrofit
+import org.cheva.miniprojecttodolist.core.preferences.AppPreferences
+import org.cheva.miniprojecttodolist.core.preferences.dataStore
 import org.cheva.miniprojecttodolist.login.data.LoginRequest
 import org.cheva.miniprojecttodolist.login.data.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(app: Application): AndroidViewModel(app) {
 
+    private val _prefs = AppPreferences(app.dataStore)
+    private val _token = _prefs.getToken()
     private val apiService = Retrofit.getInstance()
     private val _state = MutableStateFlow(LoginState())
-    val state = _state.asStateFlow()
+    val state = combine(_state, _token) { state, token ->
+        state.copy(token = token)
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), LoginState())
 
     fun onEvent(event: LoginEvent) {
         when (event) {
@@ -72,13 +81,17 @@ class LoginViewModel : ViewModel() {
                             response: Response<LoginResponse?>
                         ) {
                             when (response.code()) {
-                                200 -> _state.update {
-                                    it.copy(
-                                        successLogin = true,
-                                        message = "Berhasil Login!",
-                                        name = response.body()?.user?.name ?: "",
-                                        token = response.body()?.user?.token ?: ""
-                                    )
+                                200 -> {
+                                    viewModelScope.launch { _prefs.saveToken(response.body()?.user?.token?:"") }
+                                    viewModelScope.launch { _prefs.saveName(response.body()?.user?.name?:"") }
+                                    _state.update {
+                                        it.copy(
+                                            successLogin = true,
+                                            message = "Berhasil Login!",
+                                            name = response.body()?.user?.name ?: "",
+                                            token = response.body()?.user?.token ?: ""
+                                        )
+                                    }
                                 }
 
                                 400 -> _state.update {

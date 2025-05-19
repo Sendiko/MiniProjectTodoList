@@ -4,7 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.cheva.miniprojecttodolist.core.network.Retrofit
@@ -18,10 +20,14 @@ import retrofit2.Response
 
 class DashboardViewModel(app: Application): AndroidViewModel(app) {
 
-    private val prefs = AppPreferences(app.dataStore)
+    private val _prefs = AppPreferences(app.dataStore)
+    private val _token = _prefs.getToken()
+    private val _name = _prefs.getName()
     private val apiService = Retrofit.getInstance()
     private val _state = MutableStateFlow(DashboardState())
-    val state = _state.asStateFlow()
+    val state = combine(_token, _name, _state) { token, name, state ->
+        state.copy(token = token, name = name)
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), DashboardState())
 
     fun onEvent(event: DashboardEvent) {
         when(event) {
@@ -38,9 +44,6 @@ class DashboardViewModel(app: Application): AndroidViewModel(app) {
     }
 
     fun setNameAndToken(username: String, token: String) {
-        viewModelScope.launch {
-            prefs.saveToken(token = "Bearer $token")
-        }
         _state.update {
             it.copy(name = username, token = token)
         }
