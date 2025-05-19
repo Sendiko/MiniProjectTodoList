@@ -4,6 +4,13 @@ import android.app.Application
 
 class TodoApp : Application() {
 
-    val appContext = this
+    companion object {
+        lateinit var appContext: Application
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        appContext = this
+    }
 
 }
