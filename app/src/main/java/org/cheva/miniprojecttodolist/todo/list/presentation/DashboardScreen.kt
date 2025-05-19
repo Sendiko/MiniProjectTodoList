@@ -36,8 +36,8 @@ fun DashboardScreen(
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
-    LaunchedEffect(state.todos) {
-        if (state.todos.isEmpty()) {
+    LaunchedEffect(state.token) {
+        if (state.token.isNotBlank()) {
             onEvent(DashboardEvent.OnLoadTodo)
         }
     }

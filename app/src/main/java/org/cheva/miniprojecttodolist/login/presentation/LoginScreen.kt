@@ -1,6 +1,9 @@
 package org.cheva.miniprojecttodolist.login.presentation
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -43,75 +46,82 @@ fun LoginScreen(
 ) {
     val focusRequester = FocusRequester()
 
-    LaunchedEffect(state.successLogin) {
-        if (state.successLogin) {
+    LaunchedEffect(state.token) {
+        if (state.token.isNotBlank()) {
             onNavigate(DashboardScreen(state.name, state.token))
         }
     }
     Scaffold {
-        if (state.message.isNotBlank()) {
-            ResultDialog(
-                isSuccess = state.successLogin,
-                message = state.message,
-                onDismiss = { onEvent(LoginEvent.OnDismissDialog) }
-            )
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.Center
+
+        AnimatedVisibility(
+            visible = state.token.isBlank(),
+            enter = fadeIn(),
+            exit = fadeOut()
         ) {
-            Image(
-                painter = painterResource(R.drawable.login_image),
-                contentDescription = stringResource(R.string.app_name),
-                modifier = Modifier.weight(1f)
-                    .padding(48.dp)
-            )
-            Text(
-                text = stringResource(R.string.login_headline),
-                style = MaterialTheme.typography.headlineMedium
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = stringResource(R.string.login_hint),
-                style = MaterialTheme.typography.bodyLarge
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(
-                label = stringResource(R.string.email_label),
-                value = state.email,
-                onValueChange = { onEvent(LoginEvent.OnEmailChanged(it)) },
-                keyboardType = KeyboardType.Email,
-                hint = stringResource(R.string.email_hint),
-                imeAction = ImeAction.Next,
-                action = KeyboardActions(
-                    onNext = { focusRequester.requestFocus() }
+            if (state.message.isNotBlank()) {
+                ResultDialog(
+                    isSuccess = state.successLogin,
+                    message = state.message,
+                    onDismiss = { onEvent(LoginEvent.OnDismissDialog) }
                 )
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            SecureTextField(
-                modifier = Modifier.focusRequester(focusRequester),
-                label = stringResource(R.string.password_label),
-                value = state.password,
-                onValueChange = { onEvent(LoginEvent.OnPasswordChanged(it)) },
-                keyboardType = KeyboardType.Password,
-                isVisible = state.passwordVisible,
-                onVisibilityChange = { onEvent(LoginEvent.OnPasswordVisibilityChanged(it)) },
-                hint = stringResource(R.string.password_hint),
-            )
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = { onEvent(LoginEvent.OnLoginClicked) }
-            ) {
-                Text(stringResource(R.string.login_headline))
             }
-            TextButton(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = { onNavigate(RegisterScreen) }
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.Center
             ) {
-                Text(stringResource(R.string.to_register))
+                Image(
+                    painter = painterResource(R.drawable.login_image),
+                    contentDescription = stringResource(R.string.app_name),
+                    modifier = Modifier.weight(1f)
+                        .padding(48.dp)
+                )
+                Text(
+                    text = stringResource(R.string.login_headline),
+                    style = MaterialTheme.typography.headlineMedium
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = stringResource(R.string.login_hint),
+                    style = MaterialTheme.typography.bodyLarge
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                OutlinedTextField(
+                    label = stringResource(R.string.email_label),
+                    value = state.email,
+                    onValueChange = { onEvent(LoginEvent.OnEmailChanged(it)) },
+                    keyboardType = KeyboardType.Email,
+                    hint = stringResource(R.string.email_hint),
+                    imeAction = ImeAction.Next,
+                    action = KeyboardActions(
+                        onNext = { focusRequester.requestFocus() }
+                    )
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                SecureTextField(
+                    modifier = Modifier.focusRequester(focusRequester),
+                    label = stringResource(R.string.password_label),
+                    value = state.password,
+                    onValueChange = { onEvent(LoginEvent.OnPasswordChanged(it)) },
+                    keyboardType = KeyboardType.Password,
+                    isVisible = state.passwordVisible,
+                    onVisibilityChange = { onEvent(LoginEvent.OnPasswordVisibilityChanged(it)) },
+                    hint = stringResource(R.string.password_hint),
+                )
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = { onEvent(LoginEvent.OnLoginClicked) }
+                ) {
+                    Text(stringResource(R.string.login_headline))
+                }
+                TextButton(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = { onNavigate(RegisterScreen) }
+                ) {
+                    Text(stringResource(R.string.to_register))
+                }
             }
         }
     }
