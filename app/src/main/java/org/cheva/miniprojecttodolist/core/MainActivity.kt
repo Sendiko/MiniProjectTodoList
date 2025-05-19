@@ -48,7 +48,11 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable<LoginScreen> {
-                            val viewModel = viewModel<LoginViewModel>()
+                            val viewModel = viewModel<LoginViewModel>(
+                                factory = createViewModel {
+                                    LoginViewModel(TodoApp.appContext)
+                                }
+                            )
                             val state by viewModel.state.collectAsStateWithLifecycle()
                             LoginScreen(
                                 state = state,
@@ -59,7 +63,9 @@ class MainActivity : ComponentActivity() {
                         composable<DashboardScreen> {
                             val args = it.toRoute<DashboardScreen>()
                                 val viewModel = viewModel<DashboardViewModel>(
-                                    factory = createViewModel { DashboardViewModel(TodoApp().appContext) }
+                                    factory = createViewModel {
+                                        DashboardViewModel(TodoApp.appContext)
+                                    }
                                 )
                             val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -72,12 +78,20 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable<TodoScreen> {
-                            val viewModel = viewModel<TodoViewModel>()
+                            val viewModel = viewModel<TodoViewModel>(
+                                factory = createViewModel {
+                                    TodoViewModel(TodoApp.appContext)
+                                }
+                            )
                             val state by viewModel.state.collectAsStateWithLifecycle()
                             TodoScreen(
                                 state = state,
                                 onEvent = viewModel::onEvent,
-                                onNavigate = { navController.navigate(it) }
+                                onNavigate = {
+                                    if (it == null)
+                                        navController.navigateUp()
+                                    else navController.navigate(it)
+                                }
                             )
                         }
                     }
