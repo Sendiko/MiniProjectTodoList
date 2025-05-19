@@ -15,4 +15,4 @@ data class DashboardScreen(
 )
 
 @Serializable
-object TodoScreen
+data class TodoScreen(val id: String? = null)

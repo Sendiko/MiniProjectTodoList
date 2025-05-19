@@ -78,12 +78,14 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable<TodoScreen> {
+                            val args = it.toRoute<TodoScreen>()
                             val viewModel = viewModel<TodoViewModel>(
                                 factory = createViewModel {
                                     TodoViewModel(TodoApp.appContext)
                                 }
                             )
                             val state by viewModel.state.collectAsStateWithLifecycle()
+                            viewModel.setId(args.id)
                             TodoScreen(
                                 state = state,
                                 onEvent = viewModel::onEvent,

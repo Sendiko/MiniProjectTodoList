@@ -62,7 +62,7 @@ fun DashboardScreen(
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { onNavigate(TodoScreen) }) {
+            FloatingActionButton(onClick = { onNavigate(TodoScreen(null)) }) {
                 Icon(
                     imageVector = Icons.Filled.Add,
                     contentDescription = null
@@ -80,7 +80,7 @@ fun DashboardScreen(
                 TodoItem(
                     todo = it,
                     onCheckedChange = { onEvent(DashboardEvent.OnTodoChecked(it)) },
-                    onTodoClick = { onNavigate("") }
+                    onTodoClick = { onNavigate(TodoScreen(it.id)) }
                 )
             }
         }
