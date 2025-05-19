@@ -5,6 +5,7 @@ import org.cheva.miniprojecttodolist.login.data.LoginResponse
 import org.cheva.miniprojecttodolist.register.data.RegisterRequest
 import org.cheva.miniprojecttodolist.register.data.RegisterResponse
 import org.cheva.miniprojecttodolist.todo.list.data.GetTodosResponse
+import org.cheva.miniprojecttodolist.todo.main.data.get.GetTodoResponse
 import org.cheva.miniprojecttodolist.todo.main.data.post.PostTodoRequest
 import org.cheva.miniprojecttodolist.todo.main.data.post.PostTodoResponse
 import org.cheva.miniprojecttodolist.todo.main.data.update.UpdateTodoRequest
@@ -33,6 +34,12 @@ interface ApiService {
     fun getTodos(
         @Header("Authorization") token: String
     ): Call<GetTodosResponse>
+
+    @GET("todo/{id}")
+    fun getTodo(
+        @Path("id") id: String,
+        @Header("Authorization") token: String
+    ): Call<GetTodoResponse>
 
     @POST("todo")
     fun postTodo(
