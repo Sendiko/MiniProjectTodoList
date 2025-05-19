@@ -13,13 +13,14 @@ import org.cheva.miniprojecttodolist.core.network.Retrofit
 import org.cheva.miniprojecttodolist.core.preferences.AppPreferences
 import org.cheva.miniprojecttodolist.core.preferences.dataStore
 import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category
+import org.cheva.miniprojecttodolist.todo.main.data.get.GetTodoResponse
 import org.cheva.miniprojecttodolist.todo.main.data.post.PostTodoRequest
 import org.cheva.miniprojecttodolist.todo.main.data.post.PostTodoResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TodoViewModel(app: Application): AndroidViewModel(app) {
+class TodoViewModel(app: Application) : AndroidViewModel(app) {
 
     private val apiService = Retrofit.getInstance()
     private val preferences = AppPreferences(app.dataStore)
@@ -34,9 +35,16 @@ class TodoViewModel(app: Application): AndroidViewModel(app) {
             is TodoEvent.OnTitleChanged -> changeTitle(event.title)
             is TodoEvent.OnDescriptionChanged -> changeDescription(event.description)
             is TodoEvent.OnCategoryChanged -> changeCategory(event.category)
-            TodoEvent.OnSaveTodoClicked -> saveTodo()
+            TodoEvent.OnSaveTodoClicked -> if (state.value.id == null)
+                saveTodo()
+            else updateTodo()
             is TodoEvent.OnDropdownChanged -> changeDropdown(event.isExpanded)
+            TodoEvent.FetchTodo -> fetchTodo()
         }
+    }
+
+    fun setId(id: String?) {
+        _state.update { it.copy(id = id) }
     }
 
     private fun changeDropdown(isExpanded: Boolean) {
@@ -44,21 +52,31 @@ class TodoViewModel(app: Application): AndroidViewModel(app) {
     }
 
     private fun changeTitle(title: String) {
-        _state.update { it.copy(
-            title = title
-        ) }
+        _state.update {
+            it.copy(
+                title = title
+            )
+        }
     }
 
     private fun changeDescription(description: String) {
-        _state.update { it.copy(
-            description = description
-        ) }
+        _state.update {
+            it.copy(
+                description = description
+            )
+        }
     }
 
     private fun changeCategory(category: Category) {
-        _state.update { it.copy(
-            category = category
-        ) }
+        _state.update {
+            it.copy(
+                category = category
+            )
+        }
+    }
+
+    private fun updateTodo() {
+
     }
 
     private fun saveTodo() {
@@ -78,13 +96,15 @@ class TodoViewModel(app: Application): AndroidViewModel(app) {
                         call: Call<PostTodoResponse?>,
                         response: Response<PostTodoResponse?>
                     ) {
-                        when(response.code()) {
+                        when (response.code()) {
                             201 -> _state.update {
                                 it.copy(successPost = true)
                             }
+
                             401 -> _state.update {
                                 it.copy(successPost = false, message = "Unauthorized")
                             }
+
                             500 -> _state.update {
                                 it.copy(successPost = false, message = "Internal Server Error")
                             }
@@ -102,6 +122,54 @@ class TodoViewModel(app: Application): AndroidViewModel(app) {
 
                 }
             )
+        }
+    }
+
+    private fun fetchTodo() {
+        viewModelScope.launch {
+            if (!state.value.id.isNullOrBlank()) {
+                apiService.getTodo(
+                    id = state.value.id!!,
+                    token = "Bearer ${state.value.token}"
+                ).enqueue(
+                    object : Callback<GetTodoResponse> {
+                        override fun onResponse(
+                            call: Call<GetTodoResponse?>,
+                            response: Response<GetTodoResponse?>
+                        ) {
+                            when (response.code()) {
+                                200 -> _state.update {
+                                    it.copy(
+                                        title = response.body()?.todo?.title ?: "",
+                                        description = response.body()?.todo?.description ?: "",
+                                        category = Category.valueOf(
+                                            response.body()?.todo?.category ?: ""
+                                        )
+                                    )
+                                }
+
+                                401 -> _state.update {
+                                    it.copy(successPost = false, message = "Unauthorized")
+                                }
+
+                                500 -> _state.update {
+                                    it.copy(successPost = false, message = "Internal Server Error")
+                                }
+                            }
+                        }
+
+                        override fun onFailure(
+                            call: Call<GetTodoResponse?>,
+                            t: Throwable
+                        ) {
+                            _state.update {
+                                it.copy(successPost = false, message = "Internal Server Error")
+                            }
+                        }
+
+                    }
+                )
+            }
         }
     }
 }

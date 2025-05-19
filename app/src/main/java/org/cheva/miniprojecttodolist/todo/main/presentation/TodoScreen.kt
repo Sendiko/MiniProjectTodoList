@@ -1,5 +1,6 @@
 package org.cheva.miniprojecttodolist.todo.main.presentation
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -40,6 +41,12 @@ fun TodoScreen(
         if (state.successPost) {
             onNavigate(null)
         }
+    }
+
+    LaunchedEffect(state.id) {
+        Log.i("TODO_ID", "TodoScreen: $state.id")
+        if (state.id != null)
+            onEvent(TodoEvent.FetchTodo)
     }
 
     Scaffold(
