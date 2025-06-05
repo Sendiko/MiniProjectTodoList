@@ -16,6 +16,8 @@ import org.cheva.miniprojecttodolist.todo.list.presentation.component.Category
 import org.cheva.miniprojecttodolist.todo.main.data.get.GetTodoResponse
 import org.cheva.miniprojecttodolist.todo.main.data.post.PostTodoRequest
 import org.cheva.miniprojecttodolist.todo.main.data.post.PostTodoResponse
+import org.cheva.miniprojecttodolist.todo.main.data.update.UpdateTodoRequest
+import org.cheva.miniprojecttodolist.todo.main.data.update.UpdateTodoResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -35,9 +37,11 @@ class TodoViewModel(app: Application) : AndroidViewModel(app) {
             is TodoEvent.OnTitleChanged -> changeTitle(event.title)
             is TodoEvent.OnDescriptionChanged -> changeDescription(event.description)
             is TodoEvent.OnCategoryChanged -> changeCategory(event.category)
-            TodoEvent.OnSaveTodoClicked -> if (state.value.id == null)
-                saveTodo()
-            else updateTodo()
+            TodoEvent.OnSaveTodoClicked ->
+                if (state.value.id == null)
+                    saveTodo()
+                else updateTodo()
+
             is TodoEvent.OnDropdownChanged -> changeDropdown(event.isExpanded)
             TodoEvent.FetchTodo -> fetchTodo()
         }
@@ -76,7 +80,47 @@ class TodoViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     private fun updateTodo() {
+        viewModelScope.launch {
+            val request = UpdateTodoRequest(
+                description = state.value.description,
+                title = state.value.title,
+                category = state.value.category.toString(),
+            )
+            apiService.updateTodo(
+                id = state.value.id!!,
+                token = "Bearer ${state.value.token}",
+                request = request
+            ).enqueue(
+                object : Callback<UpdateTodoResponse> {
+                    override fun onResponse(
+                        call: Call<UpdateTodoResponse?>,
+                        response: Response<UpdateTodoResponse?>
+                    ) {
+                        when(response.code()) {
+                            200 -> _state.update {
+                                it.copy(success = true)
+                            }
+                            401 -> _state.update {
+                                it.copy(success = false, message = "Unauthorized")
+                            }
+                            500 -> _state.update {
+                                it.copy(success = false, message = "Internal Server Error")
+                            }
+                        }
+                    }
 
+                    override fun onFailure(
+                        call: Call<UpdateTodoResponse?>,
+                        t: Throwable
+                    ) {
+                        _state.update {
+                            it.copy(success = false, message = "Internal Server Error")
+                        }
+                    }
+
+                }
+            )
+        }
     }
 
     private fun saveTodo() {
@@ -98,15 +142,15 @@ class TodoViewModel(app: Application) : AndroidViewModel(app) {
                     ) {
                         when (response.code()) {
                             201 -> _state.update {
-                                it.copy(successPost = true)
+                                it.copy(success = true)
                             }
 
                             401 -> _state.update {
-                                it.copy(successPost = false, message = "Unauthorized")
+                                it.copy(success = false, message = "Unauthorized")
                             }
 
                             500 -> _state.update {
-                                it.copy(successPost = false, message = "Internal Server Error")
+                                it.copy(success = false, message = "Internal Server Error")
                             }
                         }
                     }
@@ -116,7 +160,7 @@ class TodoViewModel(app: Application) : AndroidViewModel(app) {
                         t: Throwable
                     ) {
                         _state.update {
-                            it.copy(successPost = false, message = "Internal Server Error")
+                            it.copy(success = false, message = "Internal Server Error")
                         }
                     }
 
@@ -149,11 +193,11 @@ class TodoViewModel(app: Application) : AndroidViewModel(app) {
                                 }
 
                                 401 -> _state.update {
-                                    it.copy(successPost = false, message = "Unauthorized")
+                                    it.copy(success = false, message = "Unauthorized")
                                 }
 
                                 500 -> _state.update {
-                                    it.copy(successPost = false, message = "Internal Server Error")
+                                    it.copy(success = false, message = "Internal Server Error")
                                 }
                             }
                         }
@@ -163,7 +207,7 @@ class TodoViewModel(app: Application) : AndroidViewModel(app) {
                             t: Throwable
                         ) {
                             _state.update {
-                                it.copy(successPost = false, message = "Internal Server Error")
+                                it.copy(success = false, message = "Internal Server Error")
                             }
                         }
 

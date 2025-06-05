@@ -9,6 +9,6 @@ data class TodoState(
     val message: String = "",
     val category: Category? = null,
     val isSelectingCategory: Boolean = false,
-    val successPost: Boolean = false,
+    val success: Boolean = false,
     val token: String = "",
 )

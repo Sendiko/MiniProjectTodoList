@@ -37,8 +37,8 @@ fun TodoScreen(
     onNavigate: (Any??) -> Unit
 ) {
 
-    LaunchedEffect(state.successPost) {
-        if (state.successPost) {
+    LaunchedEffect(state.success) {
+        if (state.success) {
             onNavigate(null)
         }
     }
